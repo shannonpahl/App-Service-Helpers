@@ -1,9 +1,10 @@
 ﻿using System;
 using AppServiceHelpers.Abstractions;
+using AppServiceHelpers.Forms;
 
 namespace FormsSample.ViewModels
 {
-    public class ToDoViewModel : AppServiceHelpers.Forms.BaseAzureViewModel<Models.ToDo>
+    public class ToDoViewModel : BaseAzureViewModel<Models.ToDo>
     {
         IEasyMobileServiceClient client;
         Models.ToDo todo;
@@ -37,9 +38,6 @@ namespace FormsSample.ViewModels
                 todo.Completed = value;
             }
         }
-
-
-
     }
 }
 

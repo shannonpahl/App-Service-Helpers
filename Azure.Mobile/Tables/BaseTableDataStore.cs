@@ -39,15 +39,15 @@ namespace AppServiceHelpers.Tables
 
         public async virtual Task Sync()
         {
-            var connected = await Plugin.Connectivity.CrossConnectivity.Current.IsReachable("google.com");
+			var url = serviceClient.MobileService.MobileAppUri.ToString();
+			var connected = await Plugin.Connectivity.CrossConnectivity.Current.IsReachable("http://xamarin-todo-sample.azurewebsites.net");
             if (connected == false)
                 return;
 
             try
             {
 				await serviceClient.MobileService.SyncContext.PushAsync();
-                await Table.PullAsync($"all{identifier}", Table.CreateQuery());
-
+				await Table.PullAsync($"all{identifier}", Table.CreateQuery());
             }
             catch (Exception ex)
             {

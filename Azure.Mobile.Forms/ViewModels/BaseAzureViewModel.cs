@@ -24,6 +24,8 @@ namespace AppServiceHelpers.Forms
         {
             this.client = client;
             table = client.Table<T>();
+
+			ExecuteRefreshCommand();
         }
 
         /// <summary>
@@ -36,7 +38,7 @@ namespace AppServiceHelpers.Forms
             set
             {
                 items = value;
-                OnPropertyChanged("items");
+                OnPropertyChanged("Items");
             }
         }
 
@@ -83,21 +85,23 @@ namespace AppServiceHelpers.Forms
 
             IsBusy = true;
 
-            try
-            {
-                var _items = await table.GetItemsAsync();
-                Items.Clear();
-                foreach (var item in _items)
-                {
-                    Items.Add(item);
-                }
-
-                IsBusy = false;
-            }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
-            }
+			try
+			{
+				var _items = await table.GetItemsAsync();
+				Items.Clear();
+				foreach (var item in _items)
+				{
+					Items.Add(item);
+				}
+			}
+			catch (Exception ex)
+			{
+				await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+			}
+			finally
+			{
+				IsBusy = false;
+			}
         }
 
         string title = string.Empty;

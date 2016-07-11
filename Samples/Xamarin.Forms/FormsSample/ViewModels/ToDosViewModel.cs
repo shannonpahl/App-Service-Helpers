@@ -1,12 +1,8 @@
-﻿using System;
-using AppServiceHelpers;
+﻿using FormsSample.Models;
 
-using FormsSample.Models;
-using FormsSample.DataStores;
 using Xamarin.Forms;
-using System.Threading.Tasks;
+
 using AppServiceHelpers.Abstractions;
-using System.Collections.ObjectModel;
 using AppServiceHelpers.Forms;
 
 namespace FormsSample.ViewModels
@@ -17,6 +13,8 @@ namespace FormsSample.ViewModels
         public ToDosViewModel(IEasyMobileServiceClient client) : base (client)
         {
             this.client = client;
+
+			Title = "Todos";
         }
 
         Models.ToDo selectedToDoItem;
@@ -38,4 +36,3 @@ namespace FormsSample.ViewModels
         }
     }
 }
-
