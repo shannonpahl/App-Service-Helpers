@@ -58,7 +58,7 @@ namespace AppServiceHelpers.Helpers
             }
 
             int startIndex = Count;
-            var changedItems = collection is List<T> ? (List<T>)collection : new List<T>(collection);
+            var changedItems = collection is IList<T> ? (IList<T>)collection : new List<T>(collection);
             foreach (var i in changedItems)
             {
                 Items.Add(i);
@@ -66,7 +66,7 @@ namespace AppServiceHelpers.Helpers
 
             OnPropertyChanged(new PropertyChangedEventArgs("Count"));
             OnPropertyChanged(new PropertyChangedEventArgs("Item[]"));
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, changedItems, startIndex));
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, (IList)changedItems, startIndex));
         }
 
         /// <summary> 
